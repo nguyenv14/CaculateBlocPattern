@@ -1,4 +1,4 @@
-# Caculate Debt with Bloc pattern
+# Calculate Debt with Bloc pattern
 
 A new Flutter project.
 
