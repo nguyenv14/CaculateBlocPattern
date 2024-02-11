@@ -1,6 +1,7 @@
 import 'package:caculatefeebloc/addUser/bloc/addUser_bloc.dart';
 import 'package:caculatefeebloc/home/bloc/home_bloc.dart';
 import 'package:caculatefeebloc/home/home_page.dart';
+import 'package:caculatefeebloc/login/login_page.dart';
 import 'package:caculatefeebloc/repository/user_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,18 +21,19 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => HomeBloc(UserRepository())),
-        BlocProvider(create: (_) => AddUserBloc(UserRepository()))
+        BlocProvider(create: (_) => AddUserBloc(UserRepository())),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
+            scaffoldBackgroundColor: Colors.white,
             snackBarTheme: SnackBarThemeData(
               backgroundColor: Colors.teal, // Màu nền của SnackBar
-              contentTextStyle: TextStyle(color: Colors.white), // Màu chữ
+              // contentTextStyle: TextStyle(color: Colors.white), // Màu chữ
               actionTextColor: Colors.yellow, // Màu chữ của action
             ),
-            primaryColor: Colors.teal),
-        home: const HomePage(title: 'Flutter Demo Home Page'),
+            primaryColor: Colors.white),
+        home: HomePage(title: "Caculate Debt"),
       ),
     );
   }

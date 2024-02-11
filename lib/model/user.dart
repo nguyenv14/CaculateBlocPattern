@@ -1,14 +1,20 @@
 class UserFee {
   int id;
   String userName;
+  String dateTime;
   int priceFee;
 
-  UserFee({required this.id, required this.userName, required this.priceFee});
+  UserFee(
+      {required this.id,
+      required this.userName,
+      required this.dateTime,
+      required this.priceFee});
 
   Map<String, dynamic> toJson() {
     return {
       'id': id,
       'userName': userName,
+      'dateTime': dateTime,
       'priceFee': priceFee,
     };
   }
@@ -17,6 +23,7 @@ class UserFee {
     return UserFee(
       id: json['id'],
       userName: json['userName'],
+      dateTime: json['dateTime'],
       priceFee: json['priceFee'],
     );
   }

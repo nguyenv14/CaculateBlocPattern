@@ -13,7 +13,8 @@ class HomeErrorLoadState extends HomeState {}
 
 class HomeLoadedSuccessState extends HomeState {
   final List<UserFee> userList;
-  HomeLoadedSuccessState({required this.userList});
+  final int totalPrice;
+  HomeLoadedSuccessState({required this.userList, required this.totalPrice});
 }
 
 class HomeUpdatePriceUserSuccessState extends HomeActionState {

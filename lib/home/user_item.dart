@@ -6,22 +6,45 @@ import 'package:flutter/material.dart';
 class UserFeeItem extends StatelessWidget {
   final UserFee userFee;
   final HomeBloc homeBloc;
-  UserFeeItem({super.key, required this.userFee, required this.homeBloc});
+  final Color? color;
+  UserFeeItem(
+      {super.key,
+      required this.userFee,
+      required this.homeBloc,
+      required this.color});
   final TextEditingController textEditingController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(10),
+      margin: const EdgeInsets.all(12),
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: Colors.black)),
+        borderRadius: BorderRadius.circular(10),
+        color: color,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.3),
+            spreadRadius: 5,
+            blurRadius: 7,
+            offset: Offset(7, 4),
+          ),
+        ],
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 20),
-          Text(userFee.userName,
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(userFee.userName,
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              Text(userFee.dateTime)
+            ],
+          ),
+          SizedBox(
+            height: 10,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -37,15 +60,19 @@ class UserFeeItem extends StatelessWidget {
                 onPressed: () {
                   print(textEditingController.text);
                   homeBloc.add(UpdatePriceUserEvent(
-                      price: textEditingController.text, id: userFee.id));
+                      price: textEditingController.text,
+                      name: userFee.userName));
                 },
-                // minWidth: 100,
-                // color: Colors.black,
+                minWidth: 10,
+                height: 50,
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10)),
+                    borderRadius: BorderRadius.circular(100)),
                 color: Colors.blueAccent[100],
                 textColor: Colors.white,
-                child: Icon(Icons.keyboard_backspace),
+                child: Icon(
+                  Icons.keyboard_backspace,
+                  size: 20,
+                ),
               ),
               Row(
                 children: [
@@ -63,7 +90,7 @@ class UserFeeItem extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    width: 10,
+                    width: 20,
                   ),
                   MaterialButton(
                       onPressed: () {
@@ -86,13 +113,15 @@ class UserFeeItem extends StatelessWidget {
                         );
                       },
                       // style: ButtonStyle(),
-                      minWidth: 40,
+                      minWidth: 10,
+                      height: 50,
                       color: Colors.redAccent[100],
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
+                          borderRadius: BorderRadius.circular(100)),
                       child: Icon(
                         Icons.clear,
                         color: Colors.white,
+                        size: 20,
                       )),
                 ],
               )

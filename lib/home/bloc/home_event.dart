@@ -27,8 +27,8 @@ class RemoveUserButtonClick extends HomeEvent {
 
 class UpdatePriceUserEvent extends HomeEvent {
   final String price;
-  final int id;
-  UpdatePriceUserEvent({required this.price, required this.id});
+  final String name;
+  UpdatePriceUserEvent({required this.price, required this.name});
 }
 
 class HomeNavigateToAddUserPageEvent extends HomeEvent {}

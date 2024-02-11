@@ -19,9 +19,14 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   FutureOr<void> homeInitialEvent(
       HomeInitialEvent event, Emitter<HomeState> emit) async {
     emit(HomeLoadingState());
-    await Future.delayed(Duration(seconds: 1));
+    await Future.delayed(Duration(seconds: 2));
     List<UserFee> userFees = user_repository.getListUserFee();
-    emit(HomeLoadedSuccessState(userList: userFees));
+    // int price = price + userFees.forEach((element) => element.priceFee);
+    int price = 0;
+    userFees.forEach((element) {
+      price = price + element.priceFee;
+    });
+    emit(HomeLoadedSuccessState(userList: userFees, totalPrice: price));
   }
 
   FutureOr<void> homeNavigateToAddUserPageEvent(
@@ -33,25 +38,29 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   FutureOr<void> homeGetListEvent(
       HomeGetListEvent event, Emitter<HomeState> emit) {
     List<UserFee> userFees = user_repository.getListUserFee();
-    emit(HomeLoadedSuccessState(userList: userFees));
+    int price = 0;
+    userFees.forEach((element) {
+      price = price + element.priceFee;
+    });
+    emit(HomeLoadedSuccessState(userList: userFees, totalPrice: price));
   }
 
   FutureOr<void> updatePriceUserEvent(
       UpdatePriceUserEvent event, Emitter<HomeState> emit) {
-    final numericRegex = RegExp(r'^[0-9]+$');
+    final numericRegex = RegExp(r'^-?[0-9]+$');
     if (!numericRegex.hasMatch(event.price.toString())) {
       emit(HomeUpdatePriceUserErrorState(content: "Vui lòng nhập số!!!"));
     } else {
-      user_repository.calculatePrice(int.parse(event.price), event.id);
+      user_repository.calculatePrice(int.parse(event.price), event.name);
       emit(HomeUpdatePriceUserSuccessState(
-          content: "User " + event.id.toString() + " đã update thành công"));
+          content: "User " + event.name.toString() + " đã update thành công"));
     }
   }
 
   FutureOr<void> removeUserButtonClick(
       RemoveUserButtonClick event, Emitter<HomeState> emit) {
-    user_repository.deleteUserFee(event.userFee.id);
+    user_repository.deleteUserFee(event.userFee.userName);
     emit(RemoveUserClickSuccessState(
-        content: "User " + event.userFee.id.toString() + " đã xóa!!"));
+        content: "User " + event.userFee.userName.toString() + " đã xóa!!"));
   }
 }
