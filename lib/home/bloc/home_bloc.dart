@@ -19,9 +19,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   FutureOr<void> homeInitialEvent(
       HomeInitialEvent event, Emitter<HomeState> emit) async {
     emit(HomeLoadingState());
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(seconds: 1));
     List<UserFee> userFees = user_repository.getListUserFee();
-    // int price = price + userFees.forEach((element) => element.priceFee);
     int price = 0;
     userFees.forEach((element) {
       price = price + element.priceFee;

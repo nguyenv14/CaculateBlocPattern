@@ -27,7 +27,7 @@ class AddUserPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: 60,
+                  height: 25,
                 ),
                 Row(
                   children: [
@@ -44,7 +44,7 @@ class AddUserPage extends StatelessWidget {
                   ],
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 30,
                 ),
                 TextField(
                     controller: nameEditingController,
@@ -105,24 +105,6 @@ class AddUserPage extends StatelessWidget {
                         shadowColor:
                             MaterialStateProperty.all<Color>(Colors.blue[200]!),
                         elevation: MaterialStateProperty.all<double>(5.0))),
-                // MaterialButton(
-                //   onPressed: () {
-                //     // authenticationBloc.add(FormSubmitted());
-
-                //   },
-                //   child: Text('Add User'),
-                //   shape: ShapeBorder,
-                //   // style: ButtonStyle(
-                //   //     backgroundColor:
-                //   //         MaterialStateProperty.all<Color>(Colors.white),
-                //   //     shadowColor: MaterialStateProperty.all<Color>(Colors.red),
-                //   //     elevation: MaterialStateProperty.all<double>(7.0),
-                //   //     side: ,
-                //   //     overlayColor:
-                //   //         MaterialStateProperty.all<Color>(Colors.black),
-                //   //     foregroundColor:
-                //   //         MaterialStateProperty.all<Color>(Colors.red)),
-                // )
               ],
             ),
           ),

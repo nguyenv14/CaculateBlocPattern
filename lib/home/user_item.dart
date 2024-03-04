@@ -2,6 +2,8 @@ import 'package:caculatefeebloc/home/bloc/home_bloc.dart';
 import 'package:caculatefeebloc/model/user.dart';
 import 'package:caculatefeebloc/widget_local/yes_no_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class UserFeeItem extends StatelessWidget {
   final UserFee userFee;
@@ -23,10 +25,10 @@ class UserFeeItem extends StatelessWidget {
         color: color,
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.3),
+            color: Colors.limeAccent.withOpacity(0.3),
             spreadRadius: 5,
             blurRadius: 7,
-            offset: Offset(7, 4),
+            offset: Offset(1, 0),
           ),
         ],
       ),
@@ -38,8 +40,13 @@ class UserFeeItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(userFee.userName,
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-              Text(userFee.dateTime)
+                  style: GoogleFonts.spaceMono(
+                      fontWeight: FontWeight.w600, fontSize: 18)),
+              Text(
+                userFee.dateTime,
+                style: GoogleFonts.spaceMono(
+                    fontWeight: FontWeight.w600, fontSize: 16),
+              )
             ],
           ),
           SizedBox(
@@ -51,7 +58,7 @@ class UserFeeItem extends StatelessWidget {
               Container(
                 width: 100,
                 child: Text("" + userFee.priceFee.toString() + "K",
-                    style: TextStyle(
+                    style: GoogleFonts.spaceMono(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                         color: Colors.red[400])),
@@ -70,7 +77,7 @@ class UserFeeItem extends StatelessWidget {
                 color: Colors.blueAccent[100],
                 textColor: Colors.white,
                 child: Icon(
-                  Icons.keyboard_backspace,
+                  FontAwesomeIcons.plusMinus,
                   size: 20,
                 ),
               ),
@@ -119,7 +126,7 @@ class UserFeeItem extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(100)),
                       child: Icon(
-                        Icons.clear,
+                        FontAwesomeIcons.personCircleMinus,
                         color: Colors.white,
                         size: 20,
                       )),

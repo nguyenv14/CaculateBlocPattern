@@ -9,6 +9,7 @@ import 'package:caculatefeebloc/repository/user_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lottie/lottie.dart';
 
 class HomePage extends StatefulWidget {
@@ -40,161 +41,152 @@ class _HomePageState extends State<HomePage> {
           homeBloc.add(HomeGetListEvent());
         }
       },
-      child: BlocConsumer<HomeBloc, HomeState>(
-        bloc: homeBloc,
-        listenWhen: (previous, current) => current is HomeActionState,
-        buildWhen: (previous, current) => current is! HomeActionState,
-        listener: (context, state) {
-          if (state is HomeNavigateToAddUserPageState) {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => AddUserPage(),
-                ));
-          } else if (state is HomeUpdatePriceUserSuccessState) {
-            String content = state.content;
-            ScaffoldMessenger.of(context)
-                .showSnackBar(SnackBar(content: Text(content)));
-            homeBloc.add(HomeGetListEvent());
-          } else if (state is HomeUpdatePriceUserErrorState) {
-            String content = state.content;
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: Text(content),
-              backgroundColor: Colors.red,
-            ));
-          } else if (state is RemoveUserClickSuccessState) {
-            String content = state.content;
-            ScaffoldMessenger.of(context)
-                .showSnackBar(SnackBar(content: Text(content)));
-            homeBloc.add(HomeGetListEvent());
-          }
-        },
-        builder: (context, state) {
-          switch (state.runtimeType) {
-            case HomeLoadingState:
-              return Scaffold(
-                backgroundColor: Colors.white,
-                body: Center(
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: BlocConsumer<HomeBloc, HomeState>(
+          bloc: homeBloc,
+          listenWhen: (previous, current) => current is HomeActionState,
+          buildWhen: (previous, current) => current is! HomeActionState,
+          listener: (context, state) {
+            if (state is HomeNavigateToAddUserPageState) {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => AddUserPage(),
+                  ));
+            } else if (state is HomeUpdatePriceUserSuccessState) {
+              String content = state.content;
+              ScaffoldMessenger.of(context)
+                  .showSnackBar(SnackBar(content: Text(content)));
+              homeBloc.add(HomeGetListEvent());
+            } else if (state is HomeUpdatePriceUserErrorState) {
+              String content = state.content;
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text(content),
+                backgroundColor: Colors.red,
+              ));
+            } else if (state is RemoveUserClickSuccessState) {
+              String content = state.content;
+              ScaffoldMessenger.of(context)
+                  .showSnackBar(SnackBar(content: Text(content)));
+              homeBloc.add(HomeGetListEvent());
+            }
+          },
+          builder: (context, state) {
+            switch (state.runtimeType) {
+              case HomeLoadingState:
+                return Center(
                   child: Lottie.asset("assets/images/waiting.json"),
-                ),
-                extendBody: true,
-              );
-            case HomeLoadedSuccessState:
-              final successState = state as HomeLoadedSuccessState;
-              return Scaffold(
-                  extendBody: true,
-                  backgroundColor: Colors.white,
-                  body: successState.userList.length != 0
-                      ? SingleChildScrollView(
-                          child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(
-                                  height: 80,
-                                ),
-                                Container(
-                                  margin: EdgeInsets.fromLTRB(15, 0, 15, 0),
-                                  // height: 00,
-                                  // color: Colors.amber,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            "Hello Nguyen!",
-                                            style: TextStyle(
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.w600,
-                                                color: Colors.black87,
-                                                fontStyle: FontStyle.italic),
-                                          ),
-                                          Text(
-                                            "How do u feel today?",
-                                            style: TextStyle(
-                                                color: Colors.black38),
-                                          )
-                                        ],
-                                      ),
-                                      IconButton(
-                                          style: ButtonStyle(
-                                              shadowColor: MaterialStateProperty
-                                                  .all<Color>(Colors.black),
-                                              elevation: MaterialStateProperty
-                                                  .all<double>(4.0)),
-                                          onPressed: () {},
-                                          // selectedIcon: Icon(Icons.abc),
-                                          // isSelected: true,
-                                          icon: Icon(
-                                            Icons.category_outlined,
-                                            size: 22,
-                                          )),
-                                    ],
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Row(
-                                  // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                );
+              case HomeLoadedSuccessState:
+                final successState = state as HomeLoadedSuccessState;
+                return successState.userList.length != 0
+                    ? SingleChildScrollView(
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                height: 60,
+                              ),
+                              Container(
+                                margin: EdgeInsets.fromLTRB(15, 0, 15, 0),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
-                                    infoTotalWidget(
-                                        "Users",
-                                        successState.userList.length ?? 0,
-                                        Colors.pink[300],
-                                        Icons.person_pin_circle),
-                                    infoTotalWidget(
-                                        "Debt",
-                                        successState.totalPrice,
-                                        Colors.lightBlue[300],
-                                        Icons.price_change_rounded)
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "Hello Nguyen!",
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w600,
+                                              color: Colors.black87,
+                                              fontStyle: FontStyle.italic),
+                                        ),
+                                        Text(
+                                          "How do u feel today?",
+                                          style:
+                                              TextStyle(color: Colors.black38),
+                                        )
+                                      ],
+                                    ),
+                                    IconButton(
+                                        style: ButtonStyle(
+                                            shadowColor: MaterialStateProperty
+                                                .all<Color>(Colors.black),
+                                            elevation: MaterialStateProperty
+                                                .all<double>(4.0)),
+                                        onPressed: () {
+                                          homeBloc.add(
+                                              HomeNavigateToAddUserPageEvent());
+                                        },
+                                        icon: Icon(
+                                          FontAwesomeIcons.userPlus,
+                                          size: 22,
+                                        )),
                                   ],
                                 ),
-                                SizedBox(
-                                  height: 10,
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Row(
+                                // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                children: [
+                                  infoTotalWidget(
+                                      "Users",
+                                      successState.userList.length ?? 0,
+                                      Colors.pink[300],
+                                      Icons.person_pin_circle),
+                                  infoTotalWidget(
+                                      "Debt",
+                                      successState.totalPrice,
+                                      Colors.lightBlue[300],
+                                      Icons.price_change_rounded)
+                                ],
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 12.0),
+                                child: Text(
+                                  "Debt list",
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 12.0),
-                                  child: Text(
-                                    "Debt list",
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w600),
-                                  ),
-                                ),
-                                ListView.builder(
-                                    shrinkWrap: true,
-                                    padding: EdgeInsets.zero,
-                                    physics: NeverScrollableScrollPhysics(),
-                                    itemCount:
-                                        successState.userList?.length ?? 0,
-                                    itemBuilder: (context, index) {
-                                      return UserFeeItem(
-                                        homeBloc: homeBloc,
-                                        userFee: successState.userList[index],
-                                        color: Colors.amber[100],
-                                      );
-                                    }),
-                              ]),
-                        )
-                      : Center(child: Text("Danh sách rỗng!")),
-                  floatingActionButton: FloatingActionButton(
-                    onPressed: () {
-                      homeBloc.add(HomeNavigateToAddUserPageEvent());
-                    },
-                    child: Icon(Icons.add),
-                  ));
-            case HomeErrorLoadState:
-              return Scaffold(body: Center(child: Text('Error')));
-            default:
-              return SizedBox();
-          }
-        },
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              ListView.builder(
+                                  shrinkWrap: true,
+                                  padding: EdgeInsets.zero,
+                                  physics: NeverScrollableScrollPhysics(),
+                                  itemCount: successState.userList?.length ?? 0,
+                                  itemBuilder: (context, index) {
+                                    return UserFeeItem(
+                                      homeBloc: homeBloc,
+                                      userFee: successState.userList[index],
+                                      color: Colors.amber[100],
+                                    );
+                                  }),
+                            ]),
+                      )
+                    : Center(child: Text("Danh sách rỗng!"));
+              case HomeErrorLoadState:
+                return Center(child: Text('Error'));
+              default:
+                return SizedBox();
+            }
+          },
+        ),
       ),
     );
   }
