@@ -4,6 +4,7 @@ import 'package:caculatefeebloc/model/spend.dart';
 import 'package:caculatefeebloc/repository/spend_repository.dart';
 import 'package:caculatefeebloc/spend/bloc/spend_bloc.dart';
 import 'package:caculatefeebloc/spend/spend_item.dart';
+import 'package:caculatefeebloc/statitiscal/statistical_page.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -93,9 +94,15 @@ class _SpendPageState extends State<SpendPage> {
               OutlinedButton(
                 onPressed: () {
                   // Xử lý khi nút được nhấn
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            StatisticalPage(spendBloc: spendBloc),
+                      ));
                 },
                 style: OutlinedButton.styleFrom(
-                  backgroundColor: Colors.blue, // Màu chữ và đường viền của nút
+                  // backgroundColor: Colors.blue, // Màu chữ và đường viền của nút
                   side:
                       BorderSide(color: Colors.blue), // Màu đường viền của nút
                   shape: RoundedRectangleBorder(

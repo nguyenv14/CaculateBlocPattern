@@ -6,6 +6,7 @@ import 'package:caculatefeebloc/repository/spend_repository.dart';
 import 'package:caculatefeebloc/repository/user_repository.dart';
 import 'package:caculatefeebloc/spend/bloc/spend_bloc.dart';
 import 'package:caculatefeebloc/spend/spend_page.dart';
+import 'package:caculatefeebloc/statitiscal/bloc/statistical_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,7 +29,8 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (_) => HomeBloc(UserRepository())),
         BlocProvider(create: (_) => AddUserBloc(UserRepository())),
-        BlocProvider(create: (_) => SpendBloc(SpendRepository()))
+        BlocProvider(create: (_) => SpendBloc(SpendRepository())),
+        BlocProvider(create: (_) => StatisticalBloc(SpendRepository()))
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
