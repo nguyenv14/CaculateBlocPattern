@@ -1,6 +1,7 @@
-# Calculate Debt with Bloc pattern
+# My expense management app uses the Bloc design model
 
-A new Flutter project.
+A Flutter project.
+
 
 ## Getting Started
 
