@@ -1,4 +1,4 @@
-# My expense management app uses the Bloc design model
+# My expense management app uses the Bloc design pattern
 
 A Flutter project.
 
